@@ -24,3 +24,13 @@ const createWalletButton = async () => {
   };
 };
 createWalletButton();
+
+document.getElementById("open-map").addEventListener("click", () => {
+  const carousal = document.getElementById("map-carousal");
+  carousal.style.display = "flex";
+});
+
+document.getElementById("back-btn").addEventListener("click", () => {
+  const carousal = document.getElementById("map-carousal");
+  carousal.style.display = "none";
+});

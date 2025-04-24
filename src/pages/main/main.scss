@@ -1,3 +1,5 @@
+@import "../mixin.scss";
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -16,7 +18,7 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #3b43da;
   text-decoration: inherit;
 }
 a:hover {
@@ -42,6 +44,7 @@ body {
   /* padding: 5px; */
   display: flex;
   justify-content: space-between;
+  z-index: 10;
 }
 
 .logo {
@@ -52,6 +55,7 @@ body {
   justify-content: center;
   align-items: center;
   padding-left: 10px;
+  cursor: pointer;
 }
 
 //****************COVER CONTENT
@@ -75,26 +79,49 @@ h1 {
 }
 
 #app {
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
-
   text-align: center;
 }
 
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
-}
+//****************CAROUSAL
+#map-carousal {
+  @include Flex();
+  display: none;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background-color: #bfe5f8;
+  position: absolute;
+  top: 0;
+  left: 0;
 
-.card {
-  padding: 2em;
-}
+  .swiper {
+    width: 70%;
+    height: 70%;
+  }
 
-.read-the-docs {
-  color: #888;
+  .swiper-slide {
+    background-color: transparent;
+    @include Flex();
+    gap: 1rem;
+    flex-direction: column;
+    img {
+      width: 400px;
+      height: 400px;
+      border: 3px solid black;
+    }
+
+    .map-title {
+      font-weight: 600;
+      font-size: 1.5rem;
+    }
+  }
+
+  #back-btn {
+    @include Flex();
+    font-size: 1.1rem;
+    width: 150px;
+    background-color: #242424;
+  }
 }
 
 .btn {
