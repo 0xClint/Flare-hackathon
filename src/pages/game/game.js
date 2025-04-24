@@ -6,24 +6,28 @@ import {
   EVENT_SEND_PLAYER_UPDATE,
   TAG_ANY_PLAYER,
   EVENT_SEND_MONSTER_UPDATE,
-} from "./src/constants.js";
-import { Player } from "./src/actors/Players/Player.js";
-import { loader } from "./src/resources.js";
-import { Map_Indoor } from "./src/maps/Map_Indoor.js";
-import { Player_CameraStrategy } from "./src/classes/Player_CameraStrategy.js";
+} from "../../constants.js";
+import { Player } from "../../actors/Players/Player.js";
+import { loader } from "../../resources.js";
+import { Map_Indoor } from "../../maps/Map_Indoor.js";
+import { Player_CameraStrategy } from "../../classes/Player_CameraStrategy.js";
 
-import { NetworkActorsMap } from "./src/classes/NetworkActorsMap.js";
-import { Monster } from "./src/actors/Monster/Monster.js";
+import { NetworkActorsMap } from "../../classes/NetworkActorsMap.js";
+import { Monster } from "../../actors/Monster/Monster.js";
 import {
   getWalletAddress,
   initWalletClient,
-} from "./src/components/walletConnect.js";
-import { Box } from "./src/actors/Box.js";
-import { BoxSequence } from "./src/maps/BoxSequence.js";
+} from "../../components/walletConnect.js";
+import { Box } from "../../actors/Box.js";
+import { BoxSequence } from "../../maps/BoxSequence.js";
+
+let monstersKilledCap = 3;
 
 let monsterKillCount = 0;
 const onMonsterKilled = () => {
   monsterKillCount++;
+  if (monsterKillCount == monstersKilledCap) {
+  }
   document.getElementById("monster-kill-count").textContent = monsterKillCount;
 };
 
