@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+    />
+    <link rel="stylesheet" href="./src/pages/difficulty/difficulty.scss" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="header">
+        <div class="logo" onclick="window.location.href='index.html'">
+          GAME
+          <img src="/assets/logo.png" height="50" />
+        </div>
+        <button class="btn" id="wallet-connect-btn">Connect</button>
+      </header>
+
+      <div class="difficulty-container" id="difficulty-container">
+        <img src="/assets/coverlogo.png" height="50" class="cover-img" />
+        <h1>Difficulty</h1>
+        <button class="btn menu-btn" id="easy">Easy</button>
+        <button class="btn menu-btn" id="medium">Medium</button>
+        <button class="btn menu-btn" id="hard">Hard</button>
+      </div>
+    </div>
+    <script type="module" src="/src/pages/difficulty/difficulty.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>

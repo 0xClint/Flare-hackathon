@@ -2,8 +2,14 @@ import * as ex from "excalibur";
 import { ANCHOR_TOP_LEFT, SCALE, SCALE_2x } from "../constants.js";
 import { Huds } from "../resources.js";
 
+const boxHudMap = {
+  map1: Huds.blueHud,
+  map2: Huds.greenHud,
+  map3: Huds.metalHud,
+};
+
 export class Box extends ex.Actor {
-  constructor(x, y, cols, rows) {
+  constructor(x, y, cols, rows, mapId) {
     const SIZE = 16;
 
     super({
@@ -16,7 +22,8 @@ export class Box extends ex.Actor {
       collisionType: ex.CollisionType.Fixed,
       color: ex.Color.Red,
     });
-    const sprite = Huds.blueHud.toSprite(); // convert to sprite
+    const sprite = boxHudMap[mapId].toSprite();
+    // const sprite = Huds.blueHud.toSprite(); // convert to sprite
     this.graphics.use(sprite);
     this.graphics.opacity = 1;
   }

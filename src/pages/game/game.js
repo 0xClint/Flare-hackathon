@@ -20,8 +20,24 @@ import {
 } from "../../components/walletConnect.js";
 import { Box } from "../../actors/Box.js";
 import { BoxSequence } from "../../maps/BoxSequence.js";
+import { publicClient } from "../../ViemClient.js";
+import {
+  SRN_CONTRACT_ABI,
+  SRN_CONTRACT_ADDRESS,
+} from "../../contracts/constant.js";
+import {
+  applyMod,
+  getRandomInteger,
+  reduceBigNumber,
+} from "../../helpers/converters.js";
+import { hudsData } from "../../datasets/hudsData.js";
+
+const params = new URLSearchParams(window.location.search);
+const mapId = params.get("map");
+const difficulty = params.get("difficulty");
 
 let monstersKilledCap = 3;
+let rdnArray = [];
 
 let monsterKillCount = 0;
 const onMonsterKilled = () => {
@@ -38,21 +54,36 @@ const game = new ex.Engine({
   antialiasing: false, // Pixel art graphics
 });
 
-const map = new Map_Indoor();
-game.add(map);
+game.on("initialize", async () => {
+  //Map
+  const map = new Map_Indoor(mapId);
+  game.add(map);
 
-const box = new BoxSequence();
-game.add(box);
+  //Player
+  const player = new Player(200, 200, "RED");
+  game.add(player);
 
-const player = new Player(200, 200, "RED");
-game.add(player);
+  //Boxes
+  const data = await publicClient.readContract({
+    address: SRN_CONTRACT_ADDRESS,
+    abi: SRN_CONTRACT_ABI,
+    functionName: "getSecureRandomNumber",
+  });
+  rdnArray = reduceBigNumber(data[0].toString());
+  console.log("[RANDOM NUMBER]: " + rdnArray);
 
-game.on("initialize", () => {
-  // Add custom Camera behavior, following player and being limited to the map bounds
+  const rdn = applyMod(
+    BigInt(rdnArray[getRandomInteger(hudsData.length)]),
+    hudsData.length
+  );
+  console.log(rdn);
+  //  0701631633484
+  const box = new BoxSequence(rdn, mapId);
+  game.add(box);
+
   const cameraStrategy = new Player_CameraStrategy(player, map);
   game.currentScene.camera.addStrategy(cameraStrategy);
 
-  // Set up ability to query for certain actors on the fly
   game.currentScene.world.queryManager.createQuery([TAG_ANY_PLAYER]);
 
   new NetworkActorsMap(game);

@@ -3,17 +3,23 @@ import { Images } from "../resources.js";
 import { ANCHOR_TOP_LEFT, SCALE_2x } from "../constants.js";
 import { Floor } from "../actors/Floor.js";
 
-const mapSprite = Images.indoorImage.toSprite();
+// const mapSprite = Images.indoorImage.toSprite();
 
+const mapSprite = {
+  map1: Images.blueMapImage,
+  map2: Images.greenMapImage,
+  map3: Images.metalMapImage,
+};
 export class Map_Indoor extends ex.Actor {
-  constructor() {
+  constructor(mapId = "map1") {
     super({
       x: 0,
       y: 0,
       scale: SCALE_2x,
       anchor: ANCHOR_TOP_LEFT,
     });
-    this.graphics.use(mapSprite);
+    const sprite = mapSprite[mapId].toSprite();
+    this.graphics.use(sprite);
 
     this.tileWidth = 19;
     this.tileHeight = 22;

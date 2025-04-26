@@ -9,7 +9,9 @@ const Images = {
   monsterSheetImage: new ex.ImageSource("/sprites/monster-sheet.png"),
 
   // Maps
-  indoorImage: new ex.ImageSource("/maps/indoor.png"),
+  blueMapImage: new ex.ImageSource("/maps/blue.png"),
+  greenMapImage: new ex.ImageSource("/maps/green.png"),
+  metalMapImage: new ex.ImageSource("/maps/metal.png"),
 
   // Weapons
   swordSheetImage: new ex.ImageSource("/sprites/sword-sheet.png"),
@@ -19,7 +21,9 @@ const Images = {
   explosionSheetImage: new ex.ImageSource("/sprites/explosion-sheet.png"),
 };
 const Huds = {
-  blueHud: new ex.ImageSource("/huds/bluehood.png"),
+  blueHud: new ex.ImageSource("/huds/bluehud.png"),
+  greenHud: new ex.ImageSource("/huds/greenhud.png"),
+  metalHud: new ex.ImageSource("/huds/metalhud.png"),
 };
 
 const Sounds = {};
