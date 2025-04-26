@@ -60,12 +60,9 @@ const mapId = params.get("map");
 const difficulty = params.get("difficulty");
 
 const monsterSpwanCap = {
-  easy: 1,
-  medium: 2,
-  hard: 3,
-  // easy: 4,
-  // medium: 8,
-  // hard: 12,
+  easy: 4,
+  medium: 8,
+  hard: 12,
 };
 
 let monstersKilledCap = monsterSpwanCap[difficulty];

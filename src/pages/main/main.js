@@ -49,18 +49,6 @@ document.getElementById("slide-wrapper").addEventListener("click", (e) => {
   }
 });
 
-//Get Number
-// const getRandomNumber = async () => {
-//   const data = await publicClient.readContract({
-//     address: SRN_CONTRACT_ADDRESS,
-//     abi: SRN_CONTRACT_ABI,
-//     functionName: "getSecureRandomNumber",
-//   });
-//   console.log(data);
-//   console.log("[RANDOM NUMBER]: " + reduceBigNumber(data[0].toString()));
-// };
-
-// getRandomNumber();
 
 document.getElementById("setting-btn").addEventListener("click", () => {
   document.querySelector(".modal-container").style.display = "flex";
