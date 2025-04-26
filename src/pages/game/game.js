@@ -32,19 +32,57 @@ import {
 } from "../../helpers/converters.js";
 import { hudsData } from "../../datasets/hudsData.js";
 
+import { shortenAddress } from "../../helpers/converters";
+
+initWalletClient();
+
+// Create Wallet button
+const createWalletButton = async () => {
+  const button = document.getElementById("wallet-connect-btn");
+  let address;
+
+  try {
+    address = await getWalletAddress();
+    button.innerText = shortenAddress(address);
+  } catch (error) {
+    console.log(error);
+  }
+
+  button.onclick = async () => {
+    address = await getWalletAddress();
+    button.innerText = shortenAddress(address);
+  };
+};
+createWalletButton();
+
 const params = new URLSearchParams(window.location.search);
 const mapId = params.get("map");
 const difficulty = params.get("difficulty");
 
-let monstersKilledCap = 3;
+const monsterSpwanCap = {
+  easy: 1,
+  medium: 2,
+  hard: 3,
+  // easy: 4,
+  // medium: 8,
+  // hard: 12,
+};
+
+let monstersKilledCap = monsterSpwanCap[difficulty];
+let monsterKilledCount = 0;
 let rdnArray = [];
 
-let monsterKillCount = 0;
 const onMonsterKilled = () => {
-  monsterKillCount++;
-  if (monsterKillCount == monstersKilledCap) {
+  monsterKilledCount++;
+
+  if (monsterKilledCount >= monstersKilledCap) {
+    setTimeout(() => {
+      document.querySelector(".modal-container").style.display = "flex";
+    }, 800);
+    return;
   }
-  document.getElementById("monster-kill-count").textContent = monsterKillCount;
+  document.getElementById("monster-kill-count").textContent =
+    monsterKilledCount;
 };
 
 const game = new ex.Engine({
@@ -77,7 +115,6 @@ game.on("initialize", async () => {
     hudsData.length
   );
   console.log(rdn);
-  //  0701631633484
   const box = new BoxSequence(rdn, mapId);
   game.add(box);
 
@@ -88,45 +125,21 @@ game.on("initialize", async () => {
 
   new NetworkActorsMap(game);
 
+  // const spawnLimit = 10; // ← you can set this number dynamically if needed
+  let spawnCount = 0;
+  const spawnInterval = setInterval(() => {
+    if (spawnCount >= monstersKilledCap) {
+      clearInterval(spawnInterval);
+      return;
+    }
+    const monster = new Monster(1, 19, onMonsterKilled);
+    game.add(monster);
+    spawnCount++;
+  }, 3000);
+
   game.on(EVENT_SEND_PLAYER_UPDATE, (update) => {
     // console.log(update);
   });
   game.on(EVENT_SEND_MONSTER_UPDATE, (update) => {});
 });
 game.start(loader);
-
-// Create Monster button
-const createAddMonsterButton = () => {
-  const button = document.createElement("button");
-  button.onclick = () => {
-    let spawnCount = 0;
-    const interval = setInterval(() => {
-      if (spawnCount >= 3) {
-        clearInterval(interval);
-        return;
-      }
-      const monster = new Monster(1, 19, onMonsterKilled);
-      game.add(monster);
-      spawnCount++;
-    }, 3000); // every 3 seconds
-  };
-
-  button.style.display = "block";
-  button.innerText = "ADD MONSTER";
-  document.body.append(button);
-};
-
-createAddMonsterButton();
-
-// Create Wallet button
-const createWalletButton = () => {
-  const button = document.createElement("button");
-  button.onclick = () => {
-    getWalletAddress();
-  };
-  button.style.display = "block";
-  button.innerText = "CONNECT WALLET";
-
-  document.body.append(button);
-};
-createWalletButton();

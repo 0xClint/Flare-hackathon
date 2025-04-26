@@ -10,12 +10,41 @@
   <body>
     <div id="app">
       <header class="header">
-        <div class="logo" onclick="window.location.href='index.html'">
-          GAME
-          <img src="/assets/logo.png" height="50" />
-        </div>
+        <span class="header-left">
+          <div class="logo" onclick="window.location.href='index.html'">
+            <img src="/assets/logo.png" height="50" />
+          </div>
+          <div id="monster-kill-status">
+            <img src="/assets/monster.png" height="50" />
+            <span id="monster-kill-count">0</span>
+          </div>
+        </span>
         <button class="btn" id="wallet-connect-btn">Connect</button>
       </header>
+    </div>
+    <div class="modal-container">
+      <div class="modal-success">
+        <div class="modal-title">Winner</div>
+        <div class="modal-content">
+          <div class="modal-main">
+            <span>Congratulation</span><span>You are the Winner!</span>
+          </div>
+          <div class="btn-container">
+            <button
+              style="background-color: #2185d0"
+              onclick="window.location.href='index.html'"
+            >
+              Home
+            </button>
+            <button
+              style="background-color: #009688"
+              onclick="window.location.reload()"
+            >
+              Replay
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
     <script type="module" src="/src/pages/game/game.js"></script>
   </body>

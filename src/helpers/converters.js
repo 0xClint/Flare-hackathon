@@ -13,8 +13,8 @@ export const reduceBigNumber = (rdnStr) => {
   const padded = rdnStr.padStart(78, "0");
   const chunks = [];
 
-  for (let i = 0; i < 6; i++) {
-    const chunk = padded.slice(i * 13, (i + 1) * 13);
+  for (let i = 0; i < 13; i++) {
+    const chunk = padded.slice(i * 6, (i + 1) * 6);
     chunks.push(chunk);
   }
 

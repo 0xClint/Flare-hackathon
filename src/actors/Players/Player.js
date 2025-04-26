@@ -5,16 +5,17 @@ import {
   EVENT_SEND_PLAYER_UPDATE,
   LEFT,
   SCALE_2x,
-  TAG_ANY_PLAYER, TAG_DAMAGES_PLAYER,
+  TAG_ANY_PLAYER,
+  TAG_DAMAGES_PLAYER,
   TAG_PLAYER_WEAPON,
-  UP
+  UP,
 } from "../../constants.js";
-import {DirectionQueue} from "../../classes/DirectionQueue.js";
-import {DrawShapeHelper} from "../../classes/DrawShapeHelper.js";
-import {generateCharacterAnimations} from "../../character-animations.js";
-import {PlayerAnimations} from "./PlayerAnimations.js";
-import {PlayerActions} from "./PlayerActions.js";
-import {NetworkUpdater} from "../../classes/NetworkUpdater.js";
+import { DirectionQueue } from "../../classes/DirectionQueue.js";
+import { DrawShapeHelper } from "../../classes/DrawShapeHelper.js";
+import { generateCharacterAnimations } from "../../character-animations.js";
+import { PlayerAnimations } from "./PlayerAnimations.js";
+import { PlayerActions } from "./PlayerActions.js";
+import { NetworkUpdater } from "../../classes/NetworkUpdater.js";
 
 const ACTION_1_KEY = ex.Input.Keys.Z;
 const ACTION_2_KEY = ex.Input.Keys.X;
@@ -28,7 +29,7 @@ export class Player extends ex.Actor {
       scale: SCALE_2x,
       collider: ex.Shape.Box(15, 15, ANCHOR_CENTER, new ex.Vector(0, 6)),
       collisionType: ex.CollisionType.Active,
-      color: ex.Color.Blue
+      color: ex.Color.Blue,
     });
 
     this.directionQueue = new DirectionQueue();
@@ -36,8 +37,8 @@ export class Player extends ex.Actor {
     this.actionAnimation = null;
     this.isPainFlashing = false;
     this.skinId = skinId;
-    this.skinAnims = generateCharacterAnimations(skinId)
-    this.graphics.use( this.skinAnims["DOWN"]["WALK"] );
+    this.skinAnims = generateCharacterAnimations(skinId);
+    this.graphics.use(this.skinAnims["DOWN"]["WALK"]);
     this.addTag(TAG_ANY_PLAYER);
 
     this.on("collisionstart", (evt) => this.onCollisionStart(evt));
@@ -90,7 +91,6 @@ export class Player extends ex.Actor {
     return `${actionType}|${x}|${y}|${this.vel.x}|${this.vel.y}|${this.skinId}|${this.facing}|${isInPain}|${this.isPainFlashing}`;
   }
 
-
   onPreUpdate(engine, delta) {
     this.directionQueue.update(engine);
 
@@ -99,7 +99,7 @@ export class Player extends ex.Actor {
 
     if (!this.actionAnimation) {
       this.onPreUpdateMovement(engine, delta);
-      this.onPreUpdateActionKeys(engine)
+      this.onPreUpdateActionKeys(engine);
     }
 
     // Show the right frames
@@ -111,7 +111,6 @@ export class Player extends ex.Actor {
   }
 
   onPreUpdateMovement(engine, delta) {
-
     // Work down pain state
     if (this.painState) {
       this.vel.x = this.painState.painVelX;
@@ -130,16 +129,28 @@ export class Player extends ex.Actor {
 
     this.vel.x = 0;
     this.vel.y = 0;
-    if (keyboard.isHeld(ex.Input.Keys.Left)) {
+    if (
+      keyboard.isHeld(ex.Input.Keys.Left) ||
+      keyboard.isHeld(ex.Input.Keys.KeyA)
+    ) {
       this.vel.x = -1;
     }
-    if (keyboard.isHeld(ex.Input.Keys.Right)) {
+    if (
+      keyboard.isHeld(ex.Input.Keys.Right) ||
+      keyboard.isHeld(ex.Input.Keys.KeyD)
+    ) {
       this.vel.x = 1;
     }
-    if (keyboard.isHeld(ex.Input.Keys.Up)) {
+    if (
+      keyboard.isHeld(ex.Input.Keys.Up) ||
+      keyboard.isHeld(ex.Input.Keys.KeyW)
+    ) {
       this.vel.y = -1;
     }
-    if (keyboard.isHeld(ex.Input.Keys.Down)) {
+    if (
+      keyboard.isHeld(ex.Input.Keys.Down) ||
+      keyboard.isHeld(ex.Input.Keys.KeyS)
+    ) {
       this.vel.y = 1;
     }
 

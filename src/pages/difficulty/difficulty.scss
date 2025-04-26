@@ -64,6 +64,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1px;
 
   .cover-img {
     margin: 10px 0;
@@ -73,6 +74,8 @@ body {
   }
 
   h1 {
+    margin: 8px;
+
     color: black;
   }
 }

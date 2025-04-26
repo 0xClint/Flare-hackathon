@@ -49,7 +49,6 @@
     <div id="app">
       <header class="header">
         <div class="logo" onclick="window.location.href='index.html'">
-          GAME
           <img src="/assets/logo.png" height="50" />
         </div>
         <button class="btn" id="wallet-connect-btn">Connect</button>
@@ -57,10 +56,54 @@
       <!-- onclick="window.location.href='game.html'" -->
       <div class="home-container">
         <img src="/assets/coverlogo.png" height="50" class="cover-img" />
+        <img
+          src="/assets/logoname.png"
+          height="50"
+          class="cover-img"
+          style="margin-bottom: 25px"
+        />
         <button class="btn menu-btn" id="open-map">Play</button>
-        <button class="btn menu-btn">Setting</button>
+        <button class="btn menu-btn" id="setting-btn">Setting</button>
         <button class="btn menu-btn">Temp</button>
       </div>
+
+      <div class="modal-container">
+        <div class="modal-success">
+          <span id="cancel-icon"
+            ><img src="/assets/cancelIcon.png" height="15"
+          /></span>
+          <div class="modal-title">Controls</div>
+          <div class="modal-content">
+            <ul>
+              <li class="list-item">
+                <div class="">W/<i data-lucide="arrow-up"></i></div>
+                <div class="">Upward</div>
+              </li>
+              <li class="list-item">
+                <div class="">A/ <i data-lucide="arrow-left"></i></div>
+                <div class="">Leftward</div>
+              </li>
+              <li class="list-item">
+                <div class="">D/<i data-lucide="arrow-right"></i></div>
+                <div class="">Rightward</div>
+              </li>
+              <li class="list-item">
+                <div class="">S/<i data-lucide="arrow-down"></i></div>
+                <div class="">Downward</div>
+              </li>
+              <li class="list-item">
+                <div class="">Z</div>
+                <div class="">Sword Swing</div>
+              </li>
+              <li class="list-item">
+                <div class="">X</div>
+                <div class="">Shoot Arrow</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       <div id="map-carousal">
         <div class="swiper mySwiper">
           <div class="swiper-wrapper" id="slide-wrapper">

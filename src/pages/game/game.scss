@@ -1,3 +1,5 @@
+@import "../mixin.scss";
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -59,6 +61,20 @@ canvas {
   display: flex;
   justify-content: space-between;
   z-index: 10;
+  color: #242424;
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  .header-left {
+    @include Flex();
+    gap: 1rem;
+
+    #monster-kill-status {
+      @include Flex();
+      gap: 7px;
+      font-size: 2rem;
+    }
+  }
 }
 
 .logo {
@@ -70,6 +86,62 @@ canvas {
   align-items: center;
   padding-left: 10px;
   cursor: pointer;
+}
+
+.modal-container {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  @include Flex();
+  display: none;
+  flex-direction: column;
+  background-color: #24242463;
+
+  .modal-success {
+    width: 300px;
+    min-height: 200px;
+    background-color: #315c74;
+    box-shadow: 0px 4px black, 0px -4px black, 4px 0px black, -4px 0px black,
+      0px 10px #00000038, 4px 4px #00000038, -4px 4px #00000038,
+      inset 0px 4px #ffffff36;
+    cursor: pointer;
+
+    .modal-title {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 500;
+      padding: 5px 0;
+    }
+
+    .modal-content {
+      height: 190px;
+      margin: 10px;
+      @include Flex();
+      justify-content: space-between;
+      font-size: 1.5rem;
+      font-weight: 600;
+      flex-direction: column;
+      background-color: #bfe5f8;
+      border: 2px solid black;
+      color: #315c74;
+
+      .modal-main {
+        height: 60%;
+        @include Flex();
+        flex-direction: column;
+      }
+
+      .btn-container {
+        height: 40%;
+        width: 100%;
+        @include Flex();
+        justify-content: space-around;
+      }
+    }
+  }
 }
 
 .card {
