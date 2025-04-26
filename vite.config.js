@@ -6,6 +6,7 @@ export default defineConfig({
       input: {
         home: "index.html",
         game: "game.html",
+        difficulty: "difficulty.html",
       },
     },
   },
