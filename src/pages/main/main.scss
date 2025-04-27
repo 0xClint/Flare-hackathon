@@ -45,6 +45,41 @@ body {
   display: flex;
   justify-content: space-between;
   z-index: 10;
+
+  .header-left {
+    @include Flex();
+    gap: 1rem;
+
+    #price-feed-status {
+      position: relative;
+      @include Flex();
+
+      #price-feed-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        .btn {
+          width: 150px;
+          background-color: #213547;
+        }
+        #price-feed-btc {
+          display: none;
+        }
+        #price-feed-eth {
+          display: none;
+        }
+      }
+      #price-feed-btn {
+        @include Flex();
+        transform: translateX(210px);
+        width: 50px;
+        height: 50px;
+        background-color: #213547;
+      }
+    }
+  }
 }
 
 .logo {
